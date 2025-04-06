@@ -103,14 +103,16 @@ function renderVisitedPrices() {
   const container = document.getElementById("visitedPrices");
   container.innerHTML = "<h2>Visited Locations Market Data</h2>";
   if (player.visitedPrices.length === 0) return;
-  container.innerHTML += `<table><tr><th>Location</th><th>Fuel Price</th><th>Goods</th></tr>`;
+
+  let tableHtml = `<table><tr><th>Location</th><th>Fuel Price</th><th>Goods</th></tr>`;
   player.visitedPrices.forEach((visit) => {
     const goodsList = Object.entries(visit.goods)
       .map(([g, p]) => `${g}: ${p}`)
       .join("<br>");
-    container.innerHTML += `<tr><td>${visit.name}</td><td>${visit.fuelPrice}</td><td>${goodsList}</td></tr>`;
+    tableHtml += `<tr><td>${visit.name}</td><td>${visit.fuelPrice}</td><td>${goodsList}</td></tr>`;
   });
-  container.innerHTML += `</table>`;
+  tableHtml += `</table>`;
+  container.innerHTML = tableHtml;
 }
 
 function renderInfo() {
