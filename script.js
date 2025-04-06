@@ -83,18 +83,40 @@ function distance(a, b) {
 function drawMap() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   connections.forEach(([a, b]) => {
+    const x1 = stations[a].x;
+    const y1 = stations[a].y;
+    const x2 = stations[b].x;
+    const y2 = stations[b].y;
+    const dist = distance(a, b);
+
     ctx.beginPath();
-    ctx.moveTo(stations[a].x, stations[a].y);
-    ctx.lineTo(stations[b].x, stations[b].y);
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
     ctx.strokeStyle = "#0f0";
     ctx.stroke();
+
+    // Calculate the midpoint of the line
+    const midX = (x1 + x2) / 2;
+    const midY = (y1 + y2) / 2;
+
+    // Display distance at the midpoint
+    ctx.fillStyle = "#0f0";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.fillText(dist.toString(), midX, midY);
   });
+
   for (const name in stations) {
     const station = stations[name];
     ctx.beginPath();
     ctx.arc(station.x, station.y, 10, 0, Math.PI * 2);
     ctx.fillStyle = name === player.location ? "#ff0" : "#0f0";
     ctx.fill();
+    ctx.fillStyle = "#0f0";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
     ctx.fillText(name, station.x + 12, station.y + 4);
   }
 }
@@ -117,7 +139,6 @@ function renderVisitedPrices() {
 
 function renderInfo() {
   const info = document.getElementById("info");
-  const station = stations[player.location];
   const discovered = Object.keys(player.discovered).join(", ");
   const totalCargo = Object.values(player.cargo).reduce((a, b) => a + b, 0);
   info.innerHTML = `
@@ -129,11 +150,27 @@ function renderInfo() {
   )}</p>
     <p>Fuel Efficiency: x${player.fuelEfficiency.toFixed(2)}</p>
     <p>Visited: ${discovered}</p>
+  `;
+}
+
+function renderActions() {
+  const actions = document.getElementById("actions");
+  const station = stations[player.location];
+  actions.innerHTML = `
+    <h2>Travel</h2>
+    ${connections.map(([a, b]) => {
+      if (a === player.location || b === player.location) {
+        const dest = a === player.location ? b : a;
+        const dist = Math.ceil(distance(player.location, dest) * player.fuelEfficiency);
+        return `<button onclick="travelTo('${dest}', ${dist})">Go to ${dest} (${dist} fuel)</button>`;
+      }
+      return '';
+    }).join('')}
     <h3>Market</h3>
     ${Object.entries(station.goods)
       .map(
         ([good, price]) => `
-      <div>${good} - Buy: ${price} 
+      <div>${good} - Buy: ${price}
         <button onclick="buyGood('${good}', ${price})">Buy</button>
         <button onclick="sellGood('${good}')">Sell</button>
         <button onclick="sellAll('${good}')">Sell All</button>
@@ -149,20 +186,6 @@ function renderInfo() {
     <button onclick="upgradeCargo()">Upgrade Cargo (50 credits)</button>
     <button onclick="upgradeEfficiency()">Upgrade Fuel Efficiency (75 credits)</button>
   `;
-}
-
-function renderActions() {
-  const actions = document.getElementById("actions");
-  actions.innerHTML = "<h2>Travel</h2>";
-  connections.forEach(([a, b]) => {
-    if (a === player.location || b === player.location) {
-      const dest = a === player.location ? b : a;
-      const dist = Math.ceil(
-        distance(player.location, dest) * player.fuelEfficiency
-      );
-      actions.innerHTML += `<button onclick="travelTo('${dest}', ${dist})">Go to ${dest} (${dist} fuel)</button>`;
-    }
-  });
 }
 
 function travelTo(stationName, fuelNeeded) {

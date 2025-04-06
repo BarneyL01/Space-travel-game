@@ -17,6 +17,18 @@ body {
   border: 1px solid #0f0;
   box-sizing: border-box;
 }
+#top-section {
+  display: flex;
+  width: 90%;
+  margin: 10px;
+}
+#top-section #info {
+  flex: 1;
+  margin-right: 10px;
+}
+#top-section #actions {
+  flex: 2;
+}
 #info,
 #actions,
 #visitedPrices {
