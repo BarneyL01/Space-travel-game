@@ -182,7 +182,13 @@ function renderActions() {
     <p>Price per unit: ${station.fuelPrice}</p>
     <input id="fuelAmount" type="number" min="1" value="1">
     <button onclick="buyFuel()">Buy Fuel</button>
-    <h3>Upgrades</h3>
+  `;
+}
+
+function renderUpgrades() {
+  const upgrades = document.getElementById("upgrades");
+  upgrades.innerHTML = `
+    <h2>Upgrades</h2>
     <button onclick="upgradeCargo()">Upgrade Cargo (50 credits)</button>
     <button onclick="upgradeEfficiency()">Upgrade Fuel Efficiency (75 credits)</button>
   `;
@@ -286,6 +292,7 @@ function renderAll() {
   renderInfo();
   renderActions();
   renderVisitedPrices();
+  renderUpgrades();
 }
 
 player.discovered[player.location] = true;
