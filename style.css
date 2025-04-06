@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #0f0;
+}
+#game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#info,
+#actions,
+#visitedPrices {
+  width: 90%;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #0f0;
+  box-sizing: border-box;
+}
+#info,
+#actions,
+#visitedPrices {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+#map {
+  width: 100%;
+  margin-top: 20px;
+}
+canvas {
+  background-color: #111;
+  display: block;
+  margin: auto;
+}
+button {
+  margin: 10px 6px;
+  padding: 12px 20px;
+  background-color: #060;
+  color: #0f0;
+  border: 1px solid #0f0;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-block;
+}
+button:hover {
+  background-color: #090;
+}
+input[type="number"] {
+  margin: 8px 0;
+  padding: 6px;
+  font-size: 14px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th,
+td {
+  border: 1px solid #0f0;
+  padding: 8px;
+  text-align: center;
+}
