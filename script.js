@@ -3,44 +3,44 @@ const ctx = canvas.getContext("2d");
 
 const stations = {
   Arcadia: {
-    x: 700,
+    x: 350,
     y: 150,
     fuelPrice: 4,
     goods: { food: 15, minerals: 12, tech: 30 },
   },
   Eclipse: {
-    x: 450,
-    y: 250,
+    x: 250,
+    y: 200,
     fuelPrice: 6,
     goods: { food: 9, minerals: 19, tech: 32 },
   },
   Helios: {
-    x: 600,
-    y: 300,
+    x: 300,
+    y: 250,
     fuelPrice: 3,
     goods: { food: 16, minerals: 21, tech: 34 },
   },
   Lunaris: {
-    x: 750,
-    y: 500,
+    x: 400,
+    y: 300,
     fuelPrice: 5,
     goods: { food: 14, minerals: 18, tech: 31 },
   },
   Nova: {
-    x: 200,
-    y: 600,
+    x: 150,
+    y: 350,
     fuelPrice: 8,
     goods: { food: 11, minerals: 25, tech: 38 },
   },
   Orbis: {
-    x: 300,
-    y: 400,
+    x: 200,
+    y: 250,
     fuelPrice: 7,
     goods: { food: 12, minerals: 22, tech: 35 },
   },
   Solara: {
-    x: 500,
-    y: 550,
+    x: 300,
+    y: 350,
     fuelPrice: 6,
     goods: { food: 13, minerals: 17, tech: 33 },
   },
@@ -64,7 +64,7 @@ const connections = [
 ];
 
 const player = {
-  location: "Zentara",
+  location: "Orbis",
   fuel: 100,
   credits: 100,
   cargo: {},

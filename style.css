@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #000;
-  color: #0f0;
+  color: #4682B4;
 }
 #game {
   display: flex;
@@ -15,7 +15,7 @@ body {
   width: 90%;
   padding: 20px;
   margin: 10px;
-  border: 1px solid #0f0;
+  border: 1px solid #4682B4;
   box-sizing: border-box;
 }
 #top-section {
@@ -49,9 +49,9 @@ canvas {
 button {
   margin: 10px 6px;
   padding: 12px 20px;
-  background-color: #060;
-  color: #0f0;
-  border: 1px solid #0f0;
+  background-color: #1E3A5F;
+  color: #fff;
+  border: 1px solid #4682B4;
   cursor: pointer;
   font-size: 16px;
   display: inline-block;
@@ -71,7 +71,7 @@ table {
 }
 th,
 td {
-  border: 1px solid #0f0;
+  border: 1px solid #4682B4;
   padding: 8px;
   text-align: center;
 }
