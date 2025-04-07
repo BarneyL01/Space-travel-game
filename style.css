@@ -1,3 +1,21 @@
+.market-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr;
+  gap: 5px;
+  align-items: center;
+}
+
+.good-header, .price-header, .action-header {
+  font-weight: bold;
+}
+
+.good-name, .good-price {
+  text-align: left;
+}
+
+.good-actions {
+  text-align: right;
+}
 body {
   font-family: Arial, sans-serif;
   background-color: #000;

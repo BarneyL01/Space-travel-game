@@ -95,17 +95,24 @@ function renderActions() {
       return '';
     }).join('')}
     <h3>Market</h3>
-    ${Object.entries(station.goods)
-      .map(
-        ([good, price]) => `
-      <div>${good} - Buy: ${price}
-        <button onclick="buyGood('${good}', ${price})">Buy</button>
-        <button onclick="sellGood('${good}')">Sell</button>
-        <button onclick="sellAll('${good}')">Sell All</button>
-      </div>
-    `
-      )
-      .join("")}
+    <div class="market-grid">
+      <div class="good-header">Good</div>
+      <div class="price-header">Price</div>
+      <div class="action-header"></div>
+      ${Object.entries(station.goods)
+        .map(
+          ([good, price]) => `
+        <div class="good-name">${good}</div>
+        <div class="good-price">Buy: ${price}</div>
+        <div class="good-actions">
+          <button onclick="buyGood('${good}', ${price})">Buy</button>
+          <button onclick="sellGood('${good}')">Sell</button>
+          <button onclick="sellAll('${good}')">Sell All</button>
+        </div>
+      `
+        )
+        .join("")}
+    </div>
     <h3>Fuel</h3>
     <p>Price per unit: ${station.fuelPrice}</p>
     <input id="fuelAmount" type="number" min="1" value="1">
