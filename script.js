@@ -2,6 +2,23 @@ const canvas = document.getElementById("spaceCanvas");
 const ctx = canvas.getContext("2d");
 
 
+function getGoodIcon(good) {
+  const icons = {
+    food: '🍔',
+    minerals: '💎',
+    tech: '🤖',
+    crystals: '🔮',
+    alloys: '🔧',
+    circuits: '📦',
+    drones: '🚀',
+    lasers: '🔫',
+    armor: '🛡️',
+    engines: '🚂',
+    turbines: '💨',
+  };
+  return icons[good] || '';
+}
+
 function distance(a, b) {
   const dx = stations[a].x - stations[b].x;
   const dy = stations[a].y - stations[b].y;
@@ -57,7 +74,7 @@ function renderVisitedPrices() {
   let tableHtml = `<table><tr><th>Location</th><th>Fuel Price</th><th>Goods</th></tr>`;
   player.visitedPrices.forEach((visit) => {
     const goodsList = Object.entries(visit.goods)
-      .map(([g, p]) => `${g}: ${p}`)
+      .map(([g, p]) => `<span class="good-icon">${getGoodIcon(g)}</span> ${g}: ${p}`)
       .join("<br>");
     tableHtml += `<tr><td>${visit.name}</td><td>${visit.fuelPrice}</td><td>${goodsList}</td></tr>`;
   });
@@ -102,7 +119,7 @@ function renderActions() {
       ${Object.entries(station.goods)
         .map(
           ([good, price]) => `
-        <div class="good-name">${good}</div>
+        <div class="good-name"><span class="good-icon">${getGoodIcon(good)}</span> ${good}</div>
         <div class="good-price">Buy: ${price}</div>
         <div class="good-actions">
           <button onclick="buyGood('${good}', ${price})">Buy</button>
