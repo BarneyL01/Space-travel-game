@@ -356,5 +356,3 @@ const player = {
   discovered: {},
   visitedPrices: [],
 };
-
-export { stations, connections, player };

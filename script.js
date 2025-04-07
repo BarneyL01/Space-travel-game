@@ -1,6 +1,5 @@
 const canvas = document.getElementById("spaceCanvas");
 const ctx = canvas.getContext("2d");
-import { stations, connections, player } from './gameData.js';
 
 
 function distance(a, b) {
