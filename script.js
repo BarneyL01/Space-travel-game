@@ -90,9 +90,21 @@ function renderInfo() {
     <h2>Location: ${player.location}</h2>
     <p>Fuel: ${player.fuel}</p>
     <p>Credits: ${player.credits}</p>
-    <p>Cargo (${totalCargo}/${player.cargoCapacity}): ${JSON.stringify(
-    player.cargo
-  )}</p>
+    <p>Cargo (${totalCargo}/${player.cargoCapacity}):</p>
+    <table id="cargo-table">
+      <tr>
+        <th>Good</th>
+        <th>Quantity</th>
+      </tr>
+      ${Object.entries(player.cargo)
+        .map(([good, quantity]) => `
+        <tr>
+          <td><span class="good-icon">${getGoodIcon(good)}</span> ${good}</td>
+          <td>${quantity}</td>
+        </tr>
+      `)
+        .join("")}
+    </table>
     <p>Fuel Efficiency: x${player.fuelEfficiency.toFixed(2)}</p>
     <p>Visited: ${discovered}</p>
   `;
