@@ -324,6 +324,19 @@ const stations = {
     },
   },
 };
+function removeRandomGoods() {
+  for (const station in stations) {
+    const goods = stations[station].goods;
+    const goodsList = Object.keys(goods);
+    const numToRemove = Math.min(5, goodsList.length);
+    for (let i = 0; i < numToRemove; i++) {
+      const goodToRemove = goodsList.splice(Math.floor(Math.random() * goodsList.length), 1)[0];
+      delete goods[goodToRemove];
+    }
+  }
+}
+
+removeRandomGoods();
 
 const connections = [
   ["Zentara", "Orbis"],
