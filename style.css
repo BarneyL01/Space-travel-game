@@ -113,3 +113,7 @@ td {
   padding: 8px;
   text-align: center;
 }
+.current-location {
+  color: #FFFF00; /* Yellow text for high contrast */
+  font-weight: bold;
+}

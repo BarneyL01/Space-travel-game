@@ -76,7 +76,8 @@ function renderVisitedPrices() {
     const goodsList = Object.entries(visit.goods)
       .map(([g, p]) => `<span class="good-icon">${getGoodIcon(g)}</span> ${g}: ${p}`)
       .join("<br>");
-    tableHtml += `<tr><td>${visit.name}</td><td>${visit.fuelPrice}</td><td>${goodsList}</td></tr>`;
+    const isCurrent = visit.name === player.location ? ' class="current-location"' : '';
+    tableHtml += `<tr${isCurrent}><td>${visit.name}</td><td>${visit.fuelPrice}</td><td>${goodsList}</td></tr>`;
   });
   tableHtml += `</table>`;
   container.innerHTML = tableHtml;
