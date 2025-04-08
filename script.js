@@ -33,7 +33,7 @@ function drawMap() {
     const y1 = stations[a].y * scale;
     const x2 = stations[b].x * scale;
     const y2 = stations[b].y * scale;
-    const dist = distance(a, b);
+    const dist = Math.ceil(distance(a, b) * player.fuelEfficiency);
 
     ctx.beginPath();
     ctx.moveTo(x1, y1);
