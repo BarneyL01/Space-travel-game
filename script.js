@@ -181,7 +181,34 @@ function renderActions() {
     <p>Price per unit: ${station.fuelPrice}</p>
     <input id="fuelAmount" type="number" min="1" value="1">
     <button onclick="buyFuel()">Buy Fuel</button>
+
+    <h3>Ship Status</h3>
+    <p>Hull Integrity: ${player.hull}%</p>
+    ${player.hull < 100 ? `<button onclick="repairHull()">Repair Hull</button>` : `<p>Hull fully repaired</p>`}
   `;
+}
+
+function repairHull() {
+  const station = stations[player.location];
+  const damage = 100 - player.hull;
+  if (damage <= 0) {
+    alert("Hull is already fully repaired.");
+    return;
+  }
+  const repairCostPerPercent = station.fuelPrice; // Cost per 1% damage, similar to fuel price
+  const totalCost = damage * repairCostPerPercent;
+
+  if (player.credits >= totalCost) {
+    const confirmRepair = confirm(`Repairing ${damage}% hull will cost ${totalCost} credits. Proceed?`);
+    if (confirmRepair) {
+      player.credits -= totalCost;
+      player.hull = 100;
+      alert("Hull fully repaired.");
+      renderAll();
+    }
+  } else {
+    alert("Not enough credits to repair hull.");
+  }
 }
 
 function renderUpgrades() {
@@ -229,19 +256,62 @@ function travelTo(stationName, fuelNeeded) {
         goods: { ...stations[stationName].goods },
       });
     }
-    checkForPirates();
+    checkForEncounter();
     renderAll();
   } else {
     alert("Not enough fuel!");
   }
 }
 
-function checkForPirates() {
-  const chance = Math.random();
-  if (chance < 0.25) {
-    const stolen = Math.min(player.credits, 20);
-    player.credits -= stolen;
-    alert(`Pirates attacked! You lost ${stolen} credits.`);
+function checkForEncounter() {
+  const encounterChance = Math.random();
+  if (encounterChance < 0.3) { // 30% chance of enemy ship encounter
+    const enemyCredits = Math.floor(Math.random() * 50) + 20; // 20-70 credits
+    const enemyGoods = Math.floor(Math.random() * 5) + 1; // 1-5 goods
+    const enemyStrength = Math.random(); // 0-1 difficulty factor
+
+    const attack = confirm(`An enemy ship appears!\nPotential loot: ${enemyCredits} credits and ${enemyGoods} goods.\nDo you want to attack?`);
+
+    if (attack) {
+      const successChance = 0.6 - enemyStrength * 0.5 + Math.random() * 0.4; // success chance varies
+      if (successChance > 0.5) {
+        player.credits += enemyCredits;
+        // Add goods to cargo
+        let addedGoods = 0;
+        for (const good in stations[player.location].goods) {
+          if (addedGoods >= enemyGoods) break;
+          if (!player.cargo[good]) player.cargo[good] = 0;
+          if (player.cargoCapacity > Object.values(player.cargo).reduce((a, b) => a + b, 0)) {
+            player.cargo[good]++;
+            addedGoods++;
+          }
+        }
+        alert(`You won the battle!\nGained ${enemyCredits} credits and ${addedGoods} goods.`);
+      } else {
+        const lostCredits = Math.min(player.credits, Math.floor(Math.random() * 30) + 10);
+        player.credits -= lostCredits;
+
+        // Lose some goods
+        let lostGoods = 0;
+        for (const good in player.cargo) {
+          if (lostGoods >= enemyGoods) break;
+          if (player.cargo[good] > 0) {
+            const loss = Math.min(player.cargo[good], 1);
+            player.cargo[good] -= loss;
+            lostGoods += loss;
+          }
+        }
+
+        // Take hull damage
+        const damage = Math.floor(Math.random() * 21) + 10; // 10-30 damage
+        player.hull = Math.max(0, player.hull - damage);
+
+        alert(`You lost the battle!\nLost ${lostCredits} credits, ${lostGoods} goods, and took ${damage}% hull damage.`);
+      }
+    } else {
+      // Player chose not to attack
+      alert("You avoided the enemy ship.");
+    }
   }
 }
 

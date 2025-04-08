@@ -377,4 +377,5 @@ const player = {
   visitedPrices: [],
   hasCheapestGoodsUpgrade: false,
   hasMostExpensiveGoodsUpgrade: false,
+  hull: 100, // Hull integrity percentage (0-100)
 };
