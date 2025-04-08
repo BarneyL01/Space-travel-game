@@ -153,8 +153,8 @@ function renderUpgrades() {
   const upgrades = document.getElementById("upgrades");
   upgrades.innerHTML = `
     <h2>Upgrades</h2>
-    <button onclick="upgradeCargo()">Upgrade Cargo (50 credits)</button>
-    <button onclick="upgradeEfficiency()">Upgrade Fuel Efficiency (75 credits)</button>
+    <button onclick="upgradeCargo()">Upgrade Cargo (50 credits)</button> <span class="upgrade-desc">Increases cargo capacity by 5.</span><br>
+    <button onclick="upgradeEfficiency()">Upgrade Fuel Efficiency (75 credits)</button> <span class="upgrade-desc">Reduces fuel consumption by 5%.</span>
   `;
 }
 

@@ -88,6 +88,12 @@ button {
   font-size: 16px;
   display: inline-block;
 }
+
+.upgrade-desc {
+  font-size: 0.9em;
+  color: #aaa;
+  margin-left: 10px;
+}
 button:hover {
   background-color: #090;
 }
