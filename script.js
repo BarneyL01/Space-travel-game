@@ -38,7 +38,7 @@ function drawMap() {
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
-    ctx.strokeStyle = "#0f0";
+    ctx.strokeStyle = (a === player.location || b === player.location) ? "#ff0" : "#0f0";
     ctx.stroke();
 
     // Calculate the midpoint of the line
