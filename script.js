@@ -26,12 +26,13 @@ function distance(a, b) {
 }
 
 function drawMap() {
+  const scale = 2;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   connections.forEach(([a, b]) => {
-    const x1 = stations[a].x;
-    const y1 = stations[a].y;
-    const x2 = stations[b].x;
-    const y2 = stations[b].y;
+    const x1 = stations[a].x * scale;
+    const y1 = stations[a].y * scale;
+    const x2 = stations[b].x * scale;
+    const y2 = stations[b].y * scale;
     const dist = distance(a, b);
 
     ctx.beginPath();
@@ -54,15 +55,17 @@ function drawMap() {
 
   for (const name in stations) {
     const station = stations[name];
+    const x = station.x * scale;
+    const y = station.y * scale;
     ctx.beginPath();
-    ctx.arc(station.x, station.y, 10, 0, Math.PI * 2);
+    ctx.arc(x, y, 10, 0, Math.PI * 2);
     ctx.fillStyle = name === player.location ? "#ff0" : "#0f0";
     ctx.fill();
     ctx.fillStyle = "#0f0";
     ctx.font = "12px Arial";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
-    ctx.fillText(name, station.x + 12, station.y + 4);
+    ctx.fillText(name, x + 12, y + 4);
   }
 }
 

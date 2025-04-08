@@ -1,7 +1,7 @@
 const stations = {
   Arcadia: {
-    x: 350,
-    y: 150,
+    x: 175,
+    y: 75,
     fuelPrice: 3,
     goods: {
       food: 15,
@@ -18,8 +18,8 @@ const stations = {
     },
   },
   Eclipse: {
-    x: 250,
-    y: 200,
+    x: 125,
+    y: 100,
     fuelPrice: 4,
     goods: {
       food: 9,
@@ -36,8 +36,8 @@ const stations = {
     },
   },
   Helios: {
-    x: 300,
-    y: 250,
+    x: 150,
+    y: 125,
     fuelPrice: 2,
     goods: {
       food: 16,
@@ -54,8 +54,8 @@ const stations = {
     },
   },
   Lunaris: {
-    x: 400,
-    y: 300,
+    x: 200,
+    y: 150,
     fuelPrice: 4,
     goods: {
       food: 14,
@@ -72,8 +72,8 @@ const stations = {
     },
   },
   Nova: {
-    x: 150,
-    y: 350,
+    x: 75,
+    y: 175,
     fuelPrice: 3,
     goods: {
       food: 11,
@@ -90,8 +90,8 @@ const stations = {
     },
   },
   Orbis: {
-    x: 200,
-    y: 250,
+    x: 100,
+    y: 125,
     fuelPrice: 3,
     goods: {
       food: 12,
@@ -108,8 +108,8 @@ const stations = {
     },
   },
   Solara: {
-    x: 300,
-    y: 350,
+    x: 150,
+    y: 175,
     fuelPrice: 4,
     goods: {
       food: 13,
@@ -126,8 +126,8 @@ const stations = {
     },
   },
   Zentara: {
-    x: 100,
-    y: 100,
+    x: 50,
+    y: 50,
     fuelPrice: 2,
     goods: {
       food: 10,
@@ -144,8 +144,8 @@ const stations = {
     },
   },
   Aethereia: {
-    x: 450,
-    y: 100,
+    x: 225,
+    y: 50,
     fuelPrice: 3,
     goods: {
       food: 18,
@@ -162,8 +162,8 @@ const stations = {
     },
   },
   Borealis: {
-    x: 500,
-    y: 200,
+    x: 250,
+    y: 100,
     fuelPrice: 4,
     goods: {
       food: 20,
@@ -180,8 +180,8 @@ const stations = {
     },
   },
   Celestia: {
-    x: 550,
-    y: 300,
+    x: 275,
+    y: 150,
     fuelPrice: 5,
     goods: {
       food: 22,
@@ -198,8 +198,8 @@ const stations = {
     },
   },
   Deltara: {
-    x: 400,
-    y: 400,
+    x: 200,
+    y: 200,
     fuelPrice: 4,
     goods: {
       food: 25,
@@ -216,8 +216,8 @@ const stations = {
     },
   },
   Elysium: {
-    x: 350,
-    y: 450,
+    x: 175,
+    y: 225,
     fuelPrice: 4,
     goods: {
       food: 28,
@@ -234,8 +234,8 @@ const stations = {
     },
   },
   Fluxia: {
-    x: 450,
-    y: 500,
+    x: 225,
+    y: 250,
     fuelPrice: 4,
     goods: {
       food: 30,
@@ -252,8 +252,8 @@ const stations = {
     },
   },
   Geminus: {
-    x: 500,
-    y: 550,
+    x: 250,
+    y: 275,
     fuelPrice: 5,
     goods: {
       food: 32,
@@ -270,8 +270,8 @@ const stations = {
     },
   },
   Helix: {
-    x: 550,
-    y: 600,
+    x: 275,
+    y: 300,
     fuelPrice: 5,
     goods: {
       food: 35,
@@ -288,8 +288,8 @@ const stations = {
     },
   },
   Infinity: {
-    x: 400,
-    y: 650,
+    x: 200,
+    y: 325,
     fuelPrice: 5,
     goods: {
       food: 38,
@@ -306,8 +306,8 @@ const stations = {
     },
   },
   Jovian: {
-    x: 350,
-    y: 700,
+    x: 225,
+    y: 350,
     fuelPrice: 5,
     goods: {
       food: 40,
@@ -357,6 +357,13 @@ const connections = [
   ["Arcadia", "Helix"],
   ["Lunaris", "Infinity"],
   ["Solara", "Jovian"],
+  ["Deltara", "Elysium"],
+  ["Elysium", "Fluxia"],
+  ["Fluxia", "Geminus"],
+  ["Geminus", "Helix"],
+  ["Helix", "Infinity"],
+  ["Infinity", "Jovian"],
+  ["Helix", "Jovian"],
 ];
 
 const player = {
