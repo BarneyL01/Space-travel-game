@@ -186,7 +186,9 @@ function renderUpgrades() {
   upgrades.innerHTML = `
     <h2>Upgrades</h2>
     <button onclick="upgradeCargo()">Upgrade Cargo (50 credits)</button> <span class="upgrade-desc">Increases cargo capacity by 5.</span><br>
-    <button onclick="upgradeEfficiency()">Upgrade Fuel Efficiency (75 credits)</button> <span class="upgrade-desc">Reduces fuel consumption by 5%.</span><br>
+    <button onclick="upgradeEfficiency()" ${(player.fuelEfficiency < 0.25) ? 'disabled' : ''}>
+      ${(player.fuelEfficiency < 0.25) ? 'Fuel Efficiency Maxed' : 'Upgrade Fuel Efficiency (75 credits)'}
+    </button> <span class="upgrade-desc">Reduces fuel consumption by 5%.</span><br>
     <button onclick="buyCheapestGoodsUpgrade()" ${player.hasCheapestGoodsUpgrade ? 'disabled' : ''}>
       ${player.hasCheapestGoodsUpgrade ? 'Cheapest Goods Indicator (Purchased)' : 'Cheapest Goods Indicator (100 credits)'}
     </button> <span class="upgrade-desc">Highlights the cheapest good of each type across visited locations.</span><br>
