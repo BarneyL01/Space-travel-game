@@ -109,6 +109,16 @@ button:disabled {
 button:disabled:hover {
   background-color: #888 !important;
 }
+
+/* Accordion styles */
+#upgrades h2 {
+  cursor: pointer;
+  user-select: none;
+}
+
+#upgradesContent {
+  margin-top: 10px;
+}
 input[type="number"] {
   margin: 8px 0;
   padding: 6px;

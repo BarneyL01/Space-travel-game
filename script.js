@@ -187,19 +187,34 @@ function renderActions() {
 function renderUpgrades() {
   const upgrades = document.getElementById("upgrades");
   upgrades.innerHTML = `
-    <h2>Upgrades</h2>
-    <button onclick="upgradeCargo()">Upgrade Cargo (50 credits)</button> <span class="upgrade-desc">Increases cargo capacity by 5.</span><br>
-    <button onclick="upgradeEfficiency()" ${(player.fuelEfficiency < 0.25) ? 'disabled' : ''}>
-      ${(player.fuelEfficiency < 0.25) ? 'Fuel Efficiency Maxed' : 'Upgrade Fuel Efficiency (75 credits)'}
-    </button> <span class="upgrade-desc">Reduces fuel consumption by 5%.</span><br>
-    <button onclick="buyCheapestGoodsUpgrade()" ${player.hasCheapestGoodsUpgrade ? 'disabled' : ''}>
-      ${player.hasCheapestGoodsUpgrade ? 'Cheapest Goods Indicator (Purchased)' : 'Cheapest Goods Indicator (100 credits)'}
-    </button> <span class="upgrade-desc">Highlights the cheapest good of each type across visited locations.</span><br>
-    <button onclick="buyMostExpensiveGoodsUpgrade()" ${player.hasMostExpensiveGoodsUpgrade ? 'disabled' : ''}>
-      ${player.hasMostExpensiveGoodsUpgrade ? 'Most Expensive Goods Indicator (Purchased)' : 'Most Expensive Goods Indicator (100 credits)'}
-    </button> <span class="upgrade-desc">Highlights the most expensive good of each type across visited locations.</span>
+    <h2 style="cursor:pointer;" onclick="toggleUpgrades()"><span id="upgradesToggleIcon">▼</span> Upgrades</h2>
+    <div id="upgradesContent">
+      <button onclick="upgradeCargo()">Upgrade Cargo (50 credits)</button> <span class="upgrade-desc">Increases cargo capacity by 5.</span><br>
+      <button onclick="upgradeEfficiency()" ${(player.fuelEfficiency < 0.25) ? 'disabled' : ''}>
+        ${(player.fuelEfficiency < 0.25) ? 'Fuel Efficiency Maxed' : 'Upgrade Fuel Efficiency (75 credits)'}
+      </button> <span class="upgrade-desc">Reduces fuel consumption by 5%.</span><br>
+      <button onclick="buyCheapestGoodsUpgrade()" ${player.hasCheapestGoodsUpgrade ? 'disabled' : ''}>
+        ${player.hasCheapestGoodsUpgrade ? 'Cheapest Goods Indicator (Purchased)' : 'Cheapest Goods Indicator (100 credits)'}
+      </button> <span class="upgrade-desc">Highlights the cheapest good of each type across visited locations.</span><br>
+      <button onclick="buyMostExpensiveGoodsUpgrade()" ${player.hasMostExpensiveGoodsUpgrade ? 'disabled' : ''}>
+        ${player.hasMostExpensiveGoodsUpgrade ? 'Most Expensive Goods Indicator (Purchased)' : 'Most Expensive Goods Indicator (100 credits)'}
+      </button> <span class="upgrade-desc">Highlights the most expensive good of each type across visited locations.</span>
+    </div>
   `;
 }
+
+function toggleUpgrades() {
+  const content = document.getElementById("upgradesContent");
+  const icon = document.getElementById("upgradesToggleIcon");
+  if (content.style.display === "none") {
+    content.style.display = "block";
+    if (icon) icon.textContent = "▼";
+  } else {
+    content.style.display = "none";
+    if (icon) icon.textContent = "►";
+  }
+}
+window.toggleUpgrades = toggleUpgrades;
 
 function travelTo(stationName, fuelNeeded) {
   const fuelCost = Math.ceil(fuelNeeded * player.fuelEfficiency);
