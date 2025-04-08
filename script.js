@@ -265,18 +265,54 @@ function travelTo(stationName, fuelNeeded) {
 
 function checkForEncounter() {
   const encounterChance = Math.random();
-  if (encounterChance < 0.3) { // 30% chance of enemy ship encounter
+  if (true) { // 30% chance of enemy ship encounter
     const enemyCredits = Math.floor(Math.random() * 50) + 20; // 20-70 credits
     const enemyGoods = Math.floor(Math.random() * 5) + 1; // 1-5 goods
     const enemyStrength = Math.random(); // 0-1 difficulty factor
 
-    const attack = confirm(`An enemy ship appears!\nPotential loot: ${enemyCredits} credits and ${enemyGoods} goods.\nDo you want to attack?`);
+    const modal = document.getElementById("encounterModal");
+    const text = document.getElementById("encounterText");
+    const attackBtn = document.getElementById("attackButton");
+    const ignoreBtn = document.getElementById("ignoreButton");
 
-    if (attack) {
-      const successChance = 0.6 - enemyStrength * 0.5 + Math.random() * 0.4; // success chance varies
+    text.innerText = `An enemy ship appears!\nPotential loot: ${enemyCredits} credits and ${enemyGoods} goods.\nDo you want to attack?`;
+    modal.style.display = "block";
+
+    // Remove previous event listeners by cloning
+    const newAttackBtn = attackBtn.cloneNode(true);
+    const newIgnoreBtn = ignoreBtn.cloneNode(true);
+    attackBtn.parentNode.replaceChild(newAttackBtn, attackBtn);
+    ignoreBtn.parentNode.replaceChild(newIgnoreBtn, ignoreBtn);
+
+    function showResult(message) {
+      text.innerText = message;
+      newAttackBtn.style.display = "none";
+      newIgnoreBtn.style.display = "none";
+
+      let closeBtn = document.getElementById("closeEncounterButton");
+      if (!closeBtn) {
+        closeBtn = document.createElement("button");
+        closeBtn.id = "closeEncounterButton";
+        closeBtn.innerText = "Close";
+        closeBtn.style.marginTop = "10px";
+        newAttackBtn.parentNode.appendChild(closeBtn);
+      } else {
+        closeBtn.style.display = "inline-block";
+      }
+
+      closeBtn.onclick = () => {
+        modal.style.display = "none";
+        closeBtn.style.display = "none";
+        newAttackBtn.style.display = "inline-block";
+        newIgnoreBtn.style.display = "inline-block";
+        renderAll();
+      };
+    }
+
+    newAttackBtn.onclick = () => {
+      const successChance = 0.6 - enemyStrength * 0.5 + Math.random() * 0.4;
       if (successChance > 0.5) {
         player.credits += enemyCredits;
-        // Add goods to cargo
         let addedGoods = 0;
         for (const good in stations[player.location].goods) {
           if (addedGoods >= enemyGoods) break;
@@ -286,12 +322,11 @@ function checkForEncounter() {
             addedGoods++;
           }
         }
-        alert(`You won the battle!\nGained ${enemyCredits} credits and ${addedGoods} goods.`);
+        showResult(`You won the battle!\nGained ${enemyCredits} credits and ${addedGoods} goods.`);
       } else {
         const lostCredits = Math.min(player.credits, Math.floor(Math.random() * 30) + 10);
         player.credits -= lostCredits;
 
-        // Lose some goods
         let lostGoods = 0;
         for (const good in player.cargo) {
           if (lostGoods >= enemyGoods) break;
@@ -302,16 +337,16 @@ function checkForEncounter() {
           }
         }
 
-        // Take hull damage
-        const damage = Math.floor(Math.random() * 21) + 10; // 10-30 damage
+        const damage = Math.floor(Math.random() * 21) + 10;
         player.hull = Math.max(0, player.hull - damage);
 
-        alert(`You lost the battle!\nLost ${lostCredits} credits, ${lostGoods} goods, and took ${damage}% hull damage.`);
+        showResult(`You lost the battle!\nLost ${lostCredits} credits, ${lostGoods} goods, and took ${damage}% hull damage.`);
       }
-    } else {
-      // Player chose not to attack
-      alert("You avoided the enemy ship.");
-    }
+    };
+
+    newIgnoreBtn.onclick = () => {
+      showResult("You avoided the enemy ship.");
+    };
   }
 }
 
