@@ -97,6 +97,18 @@ button {
 button:hover {
   background-color: #090;
 }
+
+button:disabled {
+  background-color: #888 !important;
+  color: #ccc !important;
+  cursor: not-allowed !important;
+  border: 1px solid #666 !important;
+  opacity: 0.6;
+}
+
+button:disabled:hover {
+  background-color: #888 !important;
+}
 input[type="number"] {
   margin: 8px 0;
   padding: 6px;
