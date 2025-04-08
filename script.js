@@ -162,15 +162,18 @@ function renderActions() {
       <div class="action-header"></div>
       ${Object.entries(station.goods)
         .map(
-          ([good, price]) => `
+          ([good, price]) => {
+            const hasCargo = player.cargo[good] > 0;
+            return `
         <div class="good-name"><span class="good-icon">${getGoodIcon(good)}</span> ${good}</div>
         <div class="good-price">Buy: ${price}</div>
         <div class="good-actions">
           <button onclick="buyGood('${good}', ${price})">Buy</button>
-          <button onclick="sellGood('${good}')">Sell</button>
-          <button onclick="sellAll('${good}')">Sell All</button>
+          <button onclick="sellGood('${good}')" ${hasCargo ? '' : 'disabled'}>Sell</button>
+          <button onclick="sellAll('${good}')" ${hasCargo ? '' : 'disabled'}>Sell All</button>
         </div>
-      `
+      `;
+          }
         )
         .join("")}
     </div>
