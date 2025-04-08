@@ -72,12 +72,19 @@ function renderVisitedPrices() {
   if (player.visitedPrices.length === 0) return;
 
   let minPrices = {};
-  if (player.hasCheapestGoodsUpgrade) {
-    // Find minimum price for each good across all visits
+  let maxPrices = {};
+  if (player.hasCheapestGoodsUpgrade || player.hasMostExpensiveGoodsUpgrade) {
     player.visitedPrices.forEach((visit) => {
       for (const [good, price] of Object.entries(visit.goods)) {
-        if (!(good in minPrices) || price < minPrices[good]) {
-          minPrices[good] = price;
+        if (player.hasCheapestGoodsUpgrade) {
+          if (!(good in minPrices) || price < minPrices[good]) {
+            minPrices[good] = price;
+          }
+        }
+        if (player.hasMostExpensiveGoodsUpgrade) {
+          if (!(good in maxPrices) || price > maxPrices[good]) {
+            maxPrices[good] = price;
+          }
         }
       }
     });
@@ -87,11 +94,14 @@ function renderVisitedPrices() {
   player.visitedPrices.forEach((visit) => {
     const goodsList = Object.entries(visit.goods)
       .map(([g, p]) => {
-        let indicator = "";
+        let indicators = "";
         if (player.hasCheapestGoodsUpgrade && minPrices[g] === p) {
-          indicator = " ⭐";
+          indicators += " 🟢";
         }
-        return `<span class="good-icon">${getGoodIcon(g)}</span> ${g}: ${p}${indicator}`;
+        if (player.hasMostExpensiveGoodsUpgrade && maxPrices[g] === p) {
+          indicators += " 🔴";
+        }
+        return `<span class="good-icon">${getGoodIcon(g)}</span> ${g}: ${p}${indicators}`;
       })
       .join("<br>");
     const isCurrent = visit.name === player.location ? ' class="current-location"' : '';
@@ -176,7 +186,10 @@ function renderUpgrades() {
     <button onclick="upgradeEfficiency()">Upgrade Fuel Efficiency (75 credits)</button> <span class="upgrade-desc">Reduces fuel consumption by 5%.</span><br>
     <button onclick="buyCheapestGoodsUpgrade()" ${player.hasCheapestGoodsUpgrade ? 'disabled' : ''}>
       ${player.hasCheapestGoodsUpgrade ? 'Cheapest Goods Indicator (Purchased)' : 'Cheapest Goods Indicator (100 credits)'}
-    </button> <span class="upgrade-desc">Highlights the cheapest good of each type across visited locations.</span>
+    </button> <span class="upgrade-desc">Highlights the cheapest good of each type across visited locations.</span><br>
+    <button onclick="buyMostExpensiveGoodsUpgrade()" ${player.hasMostExpensiveGoodsUpgrade ? 'disabled' : ''}>
+      ${player.hasMostExpensiveGoodsUpgrade ? 'Most Expensive Goods Indicator (Purchased)' : 'Most Expensive Goods Indicator (100 credits)'}
+    </button> <span class="upgrade-desc">Highlights the most expensive good of each type across visited locations.</span>
   `;
 }
 
@@ -282,6 +295,17 @@ function buyCheapestGoodsUpgrade() {
     alert("Not enough credits to purchase this upgrade.");
   }
 }
+
+function buyMostExpensiveGoodsUpgrade() {
+  if (player.credits >= 100) {
+    player.credits -= 100;
+    player.hasMostExpensiveGoodsUpgrade = true;
+    renderAll();
+  } else {
+    alert("Not enough credits to purchase this upgrade.");
+  }
+}
+window.buyMostExpensiveGoodsUpgrade = buyMostExpensiveGoodsUpgrade;
 
 function renderAll() {
   drawMap();

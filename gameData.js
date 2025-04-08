@@ -369,4 +369,5 @@ const player = {
   discovered: {},
   visitedPrices: [],
   hasCheapestGoodsUpgrade: false,
+  hasMostExpensiveGoodsUpgrade: false,
 };
