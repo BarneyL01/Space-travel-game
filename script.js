@@ -194,8 +194,9 @@ function renderUpgrades() {
 }
 
 function travelTo(stationName, fuelNeeded) {
-  if (player.fuel >= fuelNeeded) {
-    player.fuel -= fuelNeeded;
+  const fuelCost = Math.ceil(fuelNeeded * player.fuelEfficiency);
+  if (player.fuel >= fuelCost) {
+    player.fuel -= fuelCost;
     player.location = stationName;
     if (!player.discovered[stationName]) {
       player.discovered[stationName] = true;
