@@ -74,7 +74,7 @@ const stations = {
   Nova: {
     x: 150,
     y: 350,
-    fuelPrice: 6,
+    fuelPrice: 3,
     goods: {
       food: 11,
       minerals: 25,
@@ -92,7 +92,7 @@ const stations = {
   Orbis: {
     x: 200,
     y: 250,
-    fuelPrice: 5,
+    fuelPrice: 3,
     goods: {
       food: 12,
       minerals: 22,
