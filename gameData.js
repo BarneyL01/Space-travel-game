@@ -368,4 +368,5 @@ const player = {
   fuelEfficiency: 1.0,
   discovered: {},
   visitedPrices: [],
+  hasCheapestGoodsUpgrade: false,
 };

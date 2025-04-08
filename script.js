@@ -71,10 +71,28 @@ function renderVisitedPrices() {
   container.innerHTML = "<h2>Visited Locations Market Data</h2>";
   if (player.visitedPrices.length === 0) return;
 
+  let minPrices = {};
+  if (player.hasCheapestGoodsUpgrade) {
+    // Find minimum price for each good across all visits
+    player.visitedPrices.forEach((visit) => {
+      for (const [good, price] of Object.entries(visit.goods)) {
+        if (!(good in minPrices) || price < minPrices[good]) {
+          minPrices[good] = price;
+        }
+      }
+    });
+  }
+
   let tableHtml = `<table><tr><th>Location</th><th>Fuel Price</th><th>Goods</th></tr>`;
   player.visitedPrices.forEach((visit) => {
     const goodsList = Object.entries(visit.goods)
-      .map(([g, p]) => `<span class="good-icon">${getGoodIcon(g)}</span> ${g}: ${p}`)
+      .map(([g, p]) => {
+        let indicator = "";
+        if (player.hasCheapestGoodsUpgrade && minPrices[g] === p) {
+          indicator = " ⭐";
+        }
+        return `<span class="good-icon">${getGoodIcon(g)}</span> ${g}: ${p}${indicator}`;
+      })
       .join("<br>");
     const isCurrent = visit.name === player.location ? ' class="current-location"' : '';
     tableHtml += `<tr${isCurrent}><td>${visit.name}</td><td>${visit.fuelPrice}</td><td>${goodsList}</td></tr>`;
@@ -155,7 +173,10 @@ function renderUpgrades() {
   upgrades.innerHTML = `
     <h2>Upgrades</h2>
     <button onclick="upgradeCargo()">Upgrade Cargo (50 credits)</button> <span class="upgrade-desc">Increases cargo capacity by 5.</span><br>
-    <button onclick="upgradeEfficiency()">Upgrade Fuel Efficiency (75 credits)</button> <span class="upgrade-desc">Reduces fuel consumption by 5%.</span>
+    <button onclick="upgradeEfficiency()">Upgrade Fuel Efficiency (75 credits)</button> <span class="upgrade-desc">Reduces fuel consumption by 5%.</span><br>
+    <button onclick="buyCheapestGoodsUpgrade()" ${player.hasCheapestGoodsUpgrade ? 'disabled' : ''}>
+      ${player.hasCheapestGoodsUpgrade ? 'Cheapest Goods Indicator (Purchased)' : 'Cheapest Goods Indicator (100 credits)'}
+    </button> <span class="upgrade-desc">Highlights the cheapest good of each type across visited locations.</span>
   `;
 }
 
@@ -249,6 +270,16 @@ function upgradeEfficiency() {
     renderAll();
   } else {
     alert("Not enough credits to upgrade fuel efficiency.");
+  }
+}
+
+function buyCheapestGoodsUpgrade() {
+  if (player.credits >= 100) {
+    player.credits -= 100;
+    player.hasCheapestGoodsUpgrade = true;
+    renderAll();
+  } else {
+    alert("Not enough credits to purchase this upgrade.");
   }
 }
 
