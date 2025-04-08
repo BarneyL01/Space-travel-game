@@ -2,7 +2,7 @@ const stations = {
   Arcadia: {
     x: 350,
     y: 150,
-    fuelPrice: 4,
+    fuelPrice: 3,
     goods: {
       food: 15,
       minerals: 12,
@@ -20,7 +20,7 @@ const stations = {
   Eclipse: {
     x: 250,
     y: 200,
-    fuelPrice: 6,
+    fuelPrice: 4,
     goods: {
       food: 9,
       minerals: 19,
@@ -38,7 +38,7 @@ const stations = {
   Helios: {
     x: 300,
     y: 250,
-    fuelPrice: 3,
+    fuelPrice: 2,
     goods: {
       food: 16,
       minerals: 21,
@@ -56,7 +56,7 @@ const stations = {
   Lunaris: {
     x: 400,
     y: 300,
-    fuelPrice: 5,
+    fuelPrice: 4,
     goods: {
       food: 14,
       minerals: 18,
@@ -74,7 +74,7 @@ const stations = {
   Nova: {
     x: 150,
     y: 350,
-    fuelPrice: 8,
+    fuelPrice: 6,
     goods: {
       food: 11,
       minerals: 25,
@@ -92,7 +92,7 @@ const stations = {
   Orbis: {
     x: 200,
     y: 250,
-    fuelPrice: 7,
+    fuelPrice: 5,
     goods: {
       food: 12,
       minerals: 22,
@@ -110,7 +110,7 @@ const stations = {
   Solara: {
     x: 300,
     y: 350,
-    fuelPrice: 6,
+    fuelPrice: 4,
     goods: {
       food: 13,
       minerals: 17,
@@ -128,7 +128,7 @@ const stations = {
   Zentara: {
     x: 100,
     y: 100,
-    fuelPrice: 5,
+    fuelPrice: 2,
     goods: {
       food: 10,
       minerals: 20,
@@ -146,7 +146,7 @@ const stations = {
   Aethereia: {
     x: 450,
     y: 100,
-    fuelPrice: 4,
+    fuelPrice: 3,
     goods: {
       food: 18,
       minerals: 15,
@@ -164,7 +164,7 @@ const stations = {
   Borealis: {
     x: 500,
     y: 200,
-    fuelPrice: 5,
+    fuelPrice: 4,
     goods: {
       food: 20,
       minerals: 18,
@@ -182,7 +182,7 @@ const stations = {
   Celestia: {
     x: 550,
     y: 300,
-    fuelPrice: 6,
+    fuelPrice: 5,
     goods: {
       food: 22,
       minerals: 20,
@@ -200,7 +200,7 @@ const stations = {
   Deltara: {
     x: 400,
     y: 400,
-    fuelPrice: 7,
+    fuelPrice: 4,
     goods: {
       food: 25,
       minerals: 22,
@@ -218,7 +218,7 @@ const stations = {
   Elysium: {
     x: 350,
     y: 450,
-    fuelPrice: 8,
+    fuelPrice: 4,
     goods: {
       food: 28,
       minerals: 25,
@@ -236,7 +236,7 @@ const stations = {
   Fluxia: {
     x: 450,
     y: 500,
-    fuelPrice: 9,
+    fuelPrice: 4,
     goods: {
       food: 30,
       minerals: 28,
@@ -254,7 +254,7 @@ const stations = {
   Geminus: {
     x: 500,
     y: 550,
-    fuelPrice: 10,
+    fuelPrice: 5,
     goods: {
       food: 32,
       minerals: 30,
@@ -272,7 +272,7 @@ const stations = {
   Helix: {
     x: 550,
     y: 600,
-    fuelPrice: 11,
+    fuelPrice: 5,
     goods: {
       food: 35,
       minerals: 32,
@@ -290,7 +290,7 @@ const stations = {
   Infinity: {
     x: 400,
     y: 650,
-    fuelPrice: 12,
+    fuelPrice: 5,
     goods: {
       food: 38,
       minerals: 35,
@@ -308,7 +308,7 @@ const stations = {
   Jovian: {
     x: 350,
     y: 700,
-    fuelPrice: 13,
+    fuelPrice: 5,
     goods: {
       food: 40,
       minerals: 38,
@@ -361,7 +361,7 @@ const connections = [
 
 const player = {
   location: "Orbis",
-  fuel: 100,
+  fuel: 200,
   credits: 100,
   cargo: {},
   cargoCapacity: 10,
