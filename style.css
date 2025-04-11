@@ -34,11 +34,13 @@ body {
   font-family: Arial, sans-serif;
   background-color: #000;
   color: #4682B4;
+  margin: 0;
 }
 #game {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px;
 }
 #info,
 #actions,
@@ -50,34 +52,71 @@ body {
   border: 1px solid #4682B4;
   box-sizing: border-box;
 }
+/* Tab styles */
+.tab-bar {
+  display: flex;
+  width: 100%;
+  background-color: #1E3A5F;
+  margin-bottom: 10px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 15px;
+  background-color: #1E3A5F;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-button.active {
+  border-bottom-color: #4682B4;
+  background-color: #0F1A2F;
+}
+
+.tab-content {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.tab-content.active-tab {
+  display: block;
+}
+
 #top-section {
   display: flex;
-  width: 90%;
-  margin: 10px;
+  width: 100%;
+  margin: 10px 0;
+  flex-direction: column;
 }
-#top-section #info {
-  flex: 1;
-  margin-right: 10px;
-}
-#top-section #actions {
-  flex: 2;
-}
+
 #info,
 #actions,
 #visitedPrices,
 #upgrades {
-  max-height: 40vh;
+  max-height: 50vh;
   overflow-y: auto;
+  width: 100%;
+  margin: 5px 0;
 }
+
 #map {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
+
 canvas {
   background-color: #111;
   display: block;
   margin: auto;
+  max-width: 100%;
+  height: auto !important;
 }
+
 button {
   margin: 10px 6px;
   padding: 12px 20px;
@@ -177,4 +216,35 @@ td {
 
 .modal-content button:hover {
   background-color: #090;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .tab-button {
+    font-size: 12px;
+    padding: 12px;
+  }
+  
+  #game {
+    padding: 5px;
+  }
+  
+  #info,
+  #actions,
+  #visitedPrices,
+  #upgrades {
+    padding: 10px;
+    margin: 5px 0;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  #spaceCanvas {
+    width: 100% !important;
+    height: auto !important;
+  }
 }

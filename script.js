@@ -1,6 +1,35 @@
 const canvas = document.getElementById("spaceCanvas");
 const ctx = canvas.getContext("2d");
 
+// Initialize default tab and setup tab switching
+document.addEventListener('DOMContentLoaded', () => {
+  switchTab('gameTab');
+});
+
+function switchTab(tabId) {
+  // Hide all tab contents
+  document.querySelectorAll('.tab-content').forEach(tab => {
+    tab.classList.remove('active-tab');
+  });
+  
+  // Remove active class from all buttons
+  document.querySelectorAll('.tab-button').forEach(button => {
+    button.classList.remove('active');
+  });
+  
+  // Show selected tab content
+  document.getElementById(tabId).classList.add('active-tab');
+  
+  // Set active state on clicked button
+  document.querySelector(`button[onclick="switchTab('${tabId}')"]`).classList.add('active');
+  
+  // Handle canvas resizing for map tab
+  if(tabId === 'mapTab') {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetWidth * 0.7; // Maintain aspect ratio
+    drawMap();
+  }
+}
 
 function getGoodIcon(good) {
   const icons = {

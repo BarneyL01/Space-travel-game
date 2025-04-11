@@ -4,18 +4,33 @@
   <title>Space Trader Game</title>
   <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <h1>Space Trader</h1>
   <div id="game">
+    <div class="tab-bar">
+      <button class="tab-button active" onclick="switchTab('gameTab')">Game</button>
+      <button class="tab-button" onclick="switchTab('upgradesTab')">Upgrades</button>
+      <button class="tab-button" onclick="switchTab('pricesTab')">Prices</button>
+      <button class="tab-button" onclick="switchTab('mapTab')">Map</button>
+    </div>
+    <div id="gameTab" class="tab-content active-tab">
       <div id="top-section">
-          <div id="info"></div>
-          <div id="actions"></div>
+        <div id="info"></div>
+        <div id="actions"></div>
       </div>
+    </div>
+    <div id="upgradesTab" class="tab-content">
       <div id="upgrades"></div>
+    </div>
+    <div id="pricesTab" class="tab-content">
       <div id="visitedPrices"></div>
-    <div id="map">
-      <canvas id="spaceCanvas" width="1000" height="700"></canvas>
+    </div>
+    <div id="mapTab" class="tab-content">
+      <div id="map">
+        <canvas id="spaceCanvas" width="1000" height="700"></canvas>
+      </div>
     </div>
   </div>
 <script src="gameData.js"></script>
